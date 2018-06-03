@@ -1,24 +1,29 @@
 package jogoDaVelha;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
-
 public class Celula extends JButton implements ActionListener{
-	public static char ch;//Esta variavel determina quem vai jogar entre X e O
-	public Celula(){
-		ch = 'X';
+	private static char vez;//Esta variavel determina quem vai jogar entre X e O
+	private int lin, col;
+	private char[][] matRef;
+	public Celula(char[][] matriz, int linha, int coluna){
+		vez = 'X';
+		matRef = matriz;
+		lin = linha;
+		col = coluna;
+		matriz[lin][col] = ' ';
 		this.setText(" ");
 		this.addActionListener(this);
 		this.setVisible(true);
 	}
 	public void actionPerformed(ActionEvent e) {
-		if(this.getText().equals(" ")){
-			this.setText("" + ch);
-			System.out.println("marquei um Xis");
+		if(matRef[lin][col] == ' '){
+			matRef[lin][col] = vez;
+			this.setText("" + vez);
 		}
-		if(ch == 'X'){
-			ch = 'O';
-		}else{ch = 'X';}
+		if(vez == 'X'){vez = 'O';}
+		else{vez = 'X';}
 	}
 	
 }
